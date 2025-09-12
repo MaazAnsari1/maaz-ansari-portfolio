@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import Logo from "../../asserts/logo/logo1.png";
@@ -13,20 +13,19 @@ const Navbar = () => {
   const chatButtonRef = useRef(null);
   const overlayRef = useRef(null);
 
-  // ✅ Toggle menu with animation
-  const handleMenuToggle = () => {
+  // ✅ Memoized so it doesn’t change every render
+  const handleMenuToggle = useCallback(() => {
     if (menuOpen) {
       setIsClosing(true);
       setTimeout(() => {
         setMenuOpen(false);
         setIsClosing(false);
-      }, 300); // match CSS transition duration
+      }, 300);
     } else {
       setMenuOpen(true);
     }
-  };
+  }, [menuOpen]);
 
-  // ✅ Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -50,7 +49,7 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [menuOpen]);
+  }, [menuOpen, handleMenuToggle]); // ✅ now dependency is safe
 
   return (
     <header>
@@ -60,7 +59,6 @@ const Navbar = () => {
         </NavLink>
 
         <div className="nav-right">
-          {/* ✅ Chat Button with React hover events */}
           <button
             ref={chatButtonRef}
             className="chat-button animate-out"
@@ -79,7 +77,6 @@ const Navbar = () => {
             </div>
           </button>
 
-          {/* ✅ Menu Toggle */}
           <button
             className={`menu-toggle ${menuOpen ? "menu-open" : "menu-closed"}`}
             onClick={handleMenuToggle}
@@ -97,7 +94,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* ✅ Overlay */}
       {(menuOpen || isClosing) && (
         <div
           ref={overlayRef}
