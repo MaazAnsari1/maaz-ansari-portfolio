@@ -11,38 +11,36 @@ const Navbar = () => {
   const [isClosing, setIsClosing] = useState(false);
   const location = useLocation();
   const chatButtonRef = useRef(null);
+  const overlayRef = useRef(null);
 
+  // ✅ Toggle menu with animation
   const handleMenuToggle = () => {
     if (menuOpen) {
       setIsClosing(true);
       setTimeout(() => {
         setMenuOpen(false);
         setIsClosing(false);
-      }, 300);
+      }, 300); // match CSS transition duration
     } else {
       setMenuOpen(true);
     }
   };
 
+  // ✅ Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      const overlay = document.querySelector(".menu-overlay");
-      const toggleButton = document.querySelector(".menu-toggle");
-
       if (
         menuOpen &&
-        overlay &&
-        !overlay.contains(event.target) &&
-        !toggleButton.contains(event.target)
+        overlayRef.current &&
+        !overlayRef.current.contains(event.target) &&
+        !event.target.closest(".menu-toggle")
       ) {
         handleMenuToggle();
       }
     };
 
     const handleScroll = () => {
-      if (menuOpen) {
-        handleMenuToggle();
-      }
+      if (menuOpen) handleMenuToggle();
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -54,30 +52,6 @@ const Navbar = () => {
     };
   }, [menuOpen]);
 
-
-  useEffect(() => {
-    const chatButton = chatButtonRef.current;
-    if (!chatButton) return;
-
-    const handleMouseEnter = () => {
-      chatButton.classList.remove("animate-out");
-      chatButton.classList.add("animate-in");
-    };
-
-    const handleMouseLeave = () => {
-      chatButton.classList.remove("animate-in");
-      chatButton.classList.add("animate-out");
-    };
-
-    chatButton.addEventListener("mouseenter", handleMouseEnter);
-    chatButton.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      chatButton.removeEventListener("mouseenter", handleMouseEnter);
-      chatButton.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
   return (
     <header>
       <nav className="navbar">
@@ -86,16 +60,28 @@ const Navbar = () => {
         </NavLink>
 
         <div className="nav-right">
-          <button ref={chatButtonRef} className="chat-button">
+          {/* ✅ Chat Button with React hover events */}
+          <button
+            ref={chatButtonRef}
+            className="chat-button animate-out"
+            onMouseEnter={(e) => {
+              e.currentTarget.classList.remove("animate-out");
+              e.currentTarget.classList.add("animate-in");
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.classList.remove("animate-in");
+              e.currentTarget.classList.add("animate-out");
+            }}
+          >
             <span className="chat-btn-txt">Chat with Maaz</span>
             <div className="icon-wrapper">
               <FontAwesomeIcon className="faMessage-icon" icon={faMessage} />
             </div>
           </button>
 
+          {/* ✅ Menu Toggle */}
           <button
             className={`menu-toggle ${menuOpen ? "menu-open" : "menu-closed"}`}
-            data-open={menuOpen}
             onClick={handleMenuToggle}
           >
             <div className="menu-toggle-text-wrapper">
@@ -111,8 +97,12 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* ✅ Overlay */}
       {(menuOpen || isClosing) && (
-        <div className={`menu-overlay ${isClosing ? "slide-out" : "slide-in"}`}>
+        <div
+          ref={overlayRef}
+          className={`menu-overlay ${isClosing ? "slide-out" : "slide-in"}`}
+        >
           <div className="menu-links">
             <NavLink
               to="/"
