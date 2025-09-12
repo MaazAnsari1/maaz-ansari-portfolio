@@ -75,7 +75,7 @@ const Footer = () => {
   useEffect(() => {
     const links = menuLinksRef.current;
 
-    links.forEach(link => {
+    links.forEach((link) => {
       if (!link) return; // ✅ Prevent error on null
 
       const handleEnter = () => {
@@ -99,7 +99,7 @@ const Footer = () => {
     });
 
     return () => {
-      links.forEach(link => {
+      links.forEach((link) => {
         if (link && link._cleanup) {
           link._cleanup();
         }
@@ -134,13 +134,24 @@ const Footer = () => {
 
         <div className="footer-socialMedia-wrap">
           <ul>
-            <li><a href="">LinkedIn</a></li>
-            <li><a href="">GitHub</a></li>
-            <li><a href="">Instagram</a></li>
-            <li><a href="">X</a></li>
+            <li>
+              <a href="www.linkedin.com/in/maaz-ansari-linked-in">LinkedIn</a>
+            </li>
+            <li>
+              <a href="https://github.com/MaazAnsari1">GitHub</a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/hey.mazzu?igsh=MXdsZzFwNTU4M2xweQ==">
+                Instagram
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/MaazAnsari6692?t=HPHN4cijsOz24FYmhxSPIg&s=08">
+                X
+              </a>
+            </li>
           </ul>
         </div>
-
       </div>
       <div className="footer-menu-wrap animate-out" ref={menuWrapRef}>
         <div className="footer-menu">
@@ -150,13 +161,18 @@ const Footer = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`footer-menu-link ${isDisabled ? "disabled-link" : ""}`}
-                onClick={e => isDisabled && e.preventDefault()}
-                ref={el => (menuLinksRef.current[index] = el)}
+                className={`footer-menu-link ${
+                  isDisabled ? "disabled-link" : ""
+                }`}
+                onClick={(e) => isDisabled && e.preventDefault()}
+                ref={(el) => (menuLinksRef.current[index] = el)}
               >
                 {item.label}
                 <span className="footer-rightArrowIcon-wrap">
-                  <FontAwesomeIcon className="faArrowRight" icon={faArrowRight} />
+                  <FontAwesomeIcon
+                    className="faArrowRight"
+                    icon={faArrowRight}
+                  />
                 </span>
               </Link>
             );
@@ -164,12 +180,18 @@ const Footer = () => {
         </div>
 
         <div className="goUp-btn-wrap">
-          <a href="#" className="footer-goUp-btn animate-out" ref={goUpBtnRef}>
+          <Link
+            to="/"
+            className="footer-goUp-btn animate-out"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label="Scroll back to top"
+            ref={goUpBtnRef}
+          >
             Go Up
             <span className="footer-upAttrowIcon-wrap">
               <FontAwesomeIcon className="faArrowUp" icon={faArrowUp} />
             </span>
-          </a>
+          </Link>
         </div>
       </div>
     </footer>
