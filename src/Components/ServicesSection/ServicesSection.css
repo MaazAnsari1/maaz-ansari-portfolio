@@ -1,0 +1,204 @@
+.services-section {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: center;
+    margin: 5vw;
+}
+
+.services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vw;
+}
+
+.services-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5vw;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s ease-out;
+}
+
+.services-txt.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.services-txt h1 {
+    margin: 0;
+    font-size: 3vw;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.services-txt p {
+    margin: 0;
+    font-size: 2vw;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    color: #6b6f70;
+}
+
+.services-content {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    column-gap: 5%;
+    row-gap: 4vw;
+}
+
+.service-container {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4vh;
+    gap: 1.5vw;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(249, 153, 166, 0.150), rgba(199, 249, 255, 0.200));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s ease-in-out;
+}
+
+.service-container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.service-container.show:hover {
+    animation-play-state: paused !important;
+}
+
+.service-container:nth-child(1).show {
+    transition-delay: 0s;
+}
+
+.service-container:nth-child(2).show {
+    transition-delay: 0.2s;
+}
+
+.service-container:nth-child(3).show {
+    transition-delay: 0.4s;
+}
+
+.service-container:nth-child(4).show {
+    transition-delay: 0.6s;
+}
+
+.service-container:nth-child(5).show {
+    transition-delay: 0.8s;
+}
+
+@keyframes float-up-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes float-left-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+.service-container:nth-child(1).show {
+    animation: float-up-entry 0.8s ease forwards,
+               float-up-down 3s ease-in-out infinite 0.8s;
+}
+
+.service-container:nth-child(2).show {
+    animation: float-down-entry 0.8s ease forwards,
+               float-up-down 3s ease-in-out infinite 0.8s;
+}
+
+.service-container:nth-child(3).show {
+    animation: float-left-entry 0.8s ease forwards,
+               float-left-right 3s ease-in-out infinite 0.8s;
+}
+
+.service-container:nth-child(4).show {
+    animation: float-right-entry 0.8s ease forwards,
+               float-left-right 3s ease-in-out infinite 0.8s;
+}
+
+.service-container:nth-child(5).show {
+    animation: float-up-entry 0.8s ease forwards,
+               float-up-down 3s ease-in-out infinite 0.8s;
+}
+
+.service-container::before {
+    content: ' ';
+    background: rgba(255, 255, 255, 0.4);
+    top: 0;
+    height: 100%;
+    width: 60%;
+    transform: skew(45deg);
+    position: absolute;
+    transition: left 500ms ease-out;
+    left: -125%;
+}
+
+.service-container:hover::before {
+    left: 150%;
+}
+
+.service-container h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.service-container p {
+    margin: 0;
+    font-size: 1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-weight: 400;
+    color: #6b6f70;
+}
+
+@media (max-width: 767px) {
+
+    .services-section {
+        margin: 10vw 5vw;
+    }
+
+    .services {
+        gap: 5vh;
+    }
+
+    .services-txt {
+        gap: 2.5vh;
+    }
+
+    .services-txt h1 {
+        font-size: 2rem;
+    }
+
+    .services-txt p {
+        font-size: 1rem;
+    }
+
+    .services-content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10vw;
+    }
+
+    .service-container {
+        gap: 2vh;
+    }
+
+    .service-container h2 {
+        font-size: 1.3rem;
+    }
+}
