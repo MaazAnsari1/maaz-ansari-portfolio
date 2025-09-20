@@ -1,0 +1,165 @@
+/* Initial hidden state */
+.skills-txt-wrap,
+.skill-icon {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: all 0.8s ease-in-out;
+  will-change: transform, opacity;
+}
+
+/* Visible state */
+.show-element {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section wrapper */
+.skills-section {
+  margin: 10vw 0;
+  padding: 10vw 5vw;
+  display: block;
+  background: linear-gradient(145deg,
+      rgba(249, 153, 166, 0.2),
+      rgba(199, 249, 255, 0.25));
+}
+
+/* Text block */
+.skills-txt-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 5vw;
+  gap: 2vw;
+}
+
+.skills-txt-wrap h2 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-family: ui-monospace, monospace;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: #6b6f70;
+}
+
+.skills-txt-wrap h1 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  font-family: ui-monospace, monospace;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+.skills-txt-wrap p {
+  margin: 0;
+  font-size: 1rem;
+  font-family: ui-monospace, monospace;
+  font-weight: 200;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+.skills-txt-wrap a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #1e90ff;
+}
+
+/* Icons grid */
+.skills-icons-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 2vw;
+  row-gap: 2vw;
+  margin: 4vw 8vw 2vw;
+}
+
+.skill-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+  height: 10vw;
+  padding: 10px;
+  gap: 1vw;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: #9898982b;
+  backdrop-filter: blur(100%);
+  -webkit-backdrop-filter: blur(100%);
+  transition: all 0.4s ease-in-out;
+  will-change: transform;
+}
+
+.skill-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all 0.4s ease-in-out;
+}
+
+.skill-icon:hover img {
+  width: 60%;
+  height: 60%;
+}
+
+.skill-icon p {
+  display: none;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: #1e90ff;
+}
+
+.skill-icon:hover p {
+  display: flex;
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .skills-section {
+    padding: 15vw 3vw;
+  }
+
+  .skills-txt-wrap {
+    padding: 0 5vw;
+    gap: 4vw;
+  }
+
+  .skills-txt-wrap h2 {
+    font-size: 1rem;
+  }
+
+  .skills-txt-wrap h1 {
+    font-size: 1.5rem;
+  }
+
+  .skills-txt-wrap p {
+    font-size: 0.8rem;
+  }
+
+  .skills-icons-wrap {
+    column-gap: 4vw;
+    row-gap: 4vw;
+    margin: 8vw 4vw 2vw;
+  }
+  
+  .skill-icon {
+    border-radius: 15px;
+    width: 15vw;
+    height: 15vw;
+  }
+
+  .skill-icon p {
+    font-size: 0.8rem;
+  }
+}

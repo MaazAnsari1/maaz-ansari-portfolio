@@ -3,7 +3,7 @@
     flex-direction: row;
     position: relative;
     justify-content: center;
-    margin: 5vw;
+    margin: 10vw 5vw;
 }
 
 .services {
@@ -45,8 +45,9 @@
 }
 
 .services-content {
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     column-gap: 5%;
     row-gap: 4vw;
 }
@@ -59,6 +60,8 @@
     padding: 4vh;
     gap: 1.5vw;
     border-radius: 20px;
+    height: 10vw;
+    width: 20vw;
     position: relative;
     overflow: hidden;
     background: linear-gradient(145deg, rgba(249, 153, 166, 0.150), rgba(199, 249, 255, 0.200));
@@ -169,7 +172,7 @@
 @media (max-width: 767px) {
 
     .services-section {
-        margin: 10vw 5vw;
+        margin: 20vw 5vw;
     }
 
     .services {
@@ -196,6 +199,8 @@
 
     .service-container {
         gap: 2vh;
+        height: 50vw;
+        width: 60vw;
     }
 
     .service-container h2 {

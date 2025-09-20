@@ -2,7 +2,7 @@ import React from 'react';
 import "./LandingPage.css";
 import HeroSection from '../../Components/HeroSection/HeroSection';
 import ServicesSection from '../../Components/ServicesSection/ServicesSection';
-import SkillSection from '../../Components/SkillSection/SkillSection';
+import SkillSection from '../../Components/SkillsSection/SkillsSection';
 
 const LandingPage = () => {
   return (

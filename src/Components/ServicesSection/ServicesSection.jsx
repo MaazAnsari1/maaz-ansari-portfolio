@@ -4,35 +4,41 @@ import servicesData from "../../asserts/data/ServicesSectionData/ServicesSection
 
 const ServicesSection = () => {
   const sectionRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const section = sectionRef.current;
     const serviceContainers = section.querySelectorAll(".service-container");
     const servicesTxt = section.querySelector(".services-txt");
+    const elements = [servicesTxt, ...serviceContainers];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Animate text
-            if (entry.target.classList.contains("services-txt")) {
-              entry.target.classList.add("show");
-            }
-            // Animate each service container
-            if (entry.target.classList.contains("service-container")) {
-              entry.target.classList.add("show");
-            }
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
 
-    // Observe both text + service boxes
-    observer.observe(servicesTxt);
-    serviceContainers.forEach((el) => observer.observe(el));
+      elements.forEach((el) => {
+        const elTop = el.getBoundingClientRect().top;
 
-    return () => observer.disconnect();
+        // Scroll down into section: animate in
+        if (elTop < viewportHeight * 0.8 && currentScrollY > lastScrollY.current) {
+          el.classList.add("show");
+        }
+
+        // Scroll up past section: reverse animation
+        if (elTop > viewportHeight && currentScrollY < lastScrollY.current) {
+          el.classList.remove("show");
+        }
+      });
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // trigger on mount
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
